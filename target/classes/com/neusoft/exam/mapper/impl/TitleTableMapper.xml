@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.exam.mapper.TitleTableMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.exam.pojo.TitleTable">
+    <id column="title_id" jdbcType="INTEGER" property="titleId" />
+    <result column="title_text" jdbcType="VARCHAR" property="titleText" />
+    <result column="title_level" jdbcType="INTEGER" property="titleLevel" />
+    <result column="title_major" jdbcType="VARCHAR" property="titleMajor" />
+    <result column="title_backgroud" jdbcType="INTEGER" property="titleBackgroud" />
+    <result column="title_option_a" jdbcType="VARCHAR" property="titleOptionA" />
+    <result column="title_option_b" jdbcType="VARCHAR" property="titleOptionB" />
+    <result column="title_option_c" jdbcType="VARCHAR" property="titleOptionC" />
+    <result column="title_option_d" jdbcType="VARCHAR" property="titleOptionD" />
+    <result column="title_explain" jdbcType="VARCHAR" property="titleExplain" />
+    <result column="title_type" jdbcType="INTEGER" property="titleType" />
+    <result column="title_status" jdbcType="INTEGER" property="titleStatus" />
+    <result column="title_answer" jdbcType="VARCHAR" property="titleAnswer" />
+    <result column="title_time" jdbcType="VARCHAR" property="titleTime" />
+    <result column="title_num" jdbcType="INTEGER" property="titleNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    title_id, title_text, title_level, title_major, title_backgroud, title_option_a, 
+    title_option_b, title_option_c, title_option_d, title_explain, title_type, title_status, 
+    title_answer, title_time, title_num
+  </sql>
+  <select id="selectByExample" parameterType="com.neusoft.exam.pojo.TitleTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from title_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from title_table
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from title_table
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neusoft.exam.pojo.TitleTableExample">
+    delete from title_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neusoft.exam.pojo.TitleTable">
+    insert into title_table (title_id, title_text, title_level, 
+      title_major, title_backgroud, title_option_a, 
+      title_option_b, title_option_c, title_option_d, 
+      title_explain, title_type, title_status, 
+      title_answer, title_time, title_num
+      )
+    values (#{titleId,jdbcType=INTEGER}, #{titleText,jdbcType=VARCHAR}, #{titleLevel,jdbcType=INTEGER}, 
+      #{titleMajor,jdbcType=VARCHAR}, #{titleBackgroud,jdbcType=INTEGER}, #{titleOptionA,jdbcType=VARCHAR}, 
+      #{titleOptionB,jdbcType=VARCHAR}, #{titleOptionC,jdbcType=VARCHAR}, #{titleOptionD,jdbcType=VARCHAR}, 
+      #{titleExplain,jdbcType=VARCHAR}, #{titleType,jdbcType=INTEGER}, #{titleStatus,jdbcType=INTEGER}, 
+      #{titleAnswer,jdbcType=VARCHAR}, #{titleTime,jdbcType=VARCHAR}, #{titleNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.exam.pojo.TitleTable">
+    insert into title_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="titleId != null">
+        title_id,
+      </if>
+      <if test="titleText != null">
+        title_text,
+      </if>
+      <if test="titleLevel != null">
+        title_level,
+      </if>
+      <if test="titleMajor != null">
+        title_major,
+      </if>
+      <if test="titleBackgroud != null">
+        title_backgroud,
+      </if>
+      <if test="titleOptionA != null">
+        title_option_a,
+      </if>
+      <if test="titleOptionB != null">
+        title_option_b,
+      </if>
+      <if test="titleOptionC != null">
+        title_option_c,
+      </if>
+      <if test="titleOptionD != null">
+        title_option_d,
+      </if>
+      <if test="titleExplain != null">
+        title_explain,
+      </if>
+      <if test="titleType != null">
+        title_type,
+      </if>
+      <if test="titleStatus != null">
+        title_status,
+      </if>
+      <if test="titleAnswer != null">
+        title_answer,
+      </if>
+      <if test="titleTime != null">
+        title_time,
+      </if>
+      <if test="titleNum != null">
+        title_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="titleId != null">
+        #{titleId,jdbcType=INTEGER},
+      </if>
+      <if test="titleText != null">
+        #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLevel != null">
+        #{titleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="titleMajor != null">
+        #{titleMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="titleBackgroud != null">
+        #{titleBackgroud,jdbcType=INTEGER},
+      </if>
+      <if test="titleOptionA != null">
+        #{titleOptionA,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionB != null">
+        #{titleOptionB,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionC != null">
+        #{titleOptionC,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionD != null">
+        #{titleOptionD,jdbcType=VARCHAR},
+      </if>
+      <if test="titleExplain != null">
+        #{titleExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="titleType != null">
+        #{titleType,jdbcType=INTEGER},
+      </if>
+      <if test="titleStatus != null">
+        #{titleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="titleAnswer != null">
+        #{titleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="titleTime != null">
+        #{titleTime,jdbcType=VARCHAR},
+      </if>
+      <if test="titleNum != null">
+        #{titleNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.exam.pojo.TitleTableExample" resultType="java.lang.Long">
+    select count(*) from title_table
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update title_table
+    <set>
+      <if test="record.titleId != null">
+        title_id = #{record.titleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleText != null">
+        title_text = #{record.titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleLevel != null">
+        title_level = #{record.titleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleMajor != null">
+        title_major = #{record.titleMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleBackgroud != null">
+        title_backgroud = #{record.titleBackgroud,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleOptionA != null">
+        title_option_a = #{record.titleOptionA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleOptionB != null">
+        title_option_b = #{record.titleOptionB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleOptionC != null">
+        title_option_c = #{record.titleOptionC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleOptionD != null">
+        title_option_d = #{record.titleOptionD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleExplain != null">
+        title_explain = #{record.titleExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleType != null">
+        title_type = #{record.titleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleStatus != null">
+        title_status = #{record.titleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleAnswer != null">
+        title_answer = #{record.titleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleTime != null">
+        title_time = #{record.titleTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleNum != null">
+        title_num = #{record.titleNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update title_table
+    set title_id = #{record.titleId,jdbcType=INTEGER},
+      title_text = #{record.titleText,jdbcType=VARCHAR},
+      title_level = #{record.titleLevel,jdbcType=INTEGER},
+      title_major = #{record.titleMajor,jdbcType=VARCHAR},
+      title_backgroud = #{record.titleBackgroud,jdbcType=INTEGER},
+      title_option_a = #{record.titleOptionA,jdbcType=VARCHAR},
+      title_option_b = #{record.titleOptionB,jdbcType=VARCHAR},
+      title_option_c = #{record.titleOptionC,jdbcType=VARCHAR},
+      title_option_d = #{record.titleOptionD,jdbcType=VARCHAR},
+      title_explain = #{record.titleExplain,jdbcType=VARCHAR},
+      title_type = #{record.titleType,jdbcType=INTEGER},
+      title_status = #{record.titleStatus,jdbcType=INTEGER},
+      title_answer = #{record.titleAnswer,jdbcType=VARCHAR},
+      title_time = #{record.titleTime,jdbcType=VARCHAR},
+      title_num = #{record.titleNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.exam.pojo.TitleTable">
+    update title_table
+    <set>
+      <if test="titleText != null">
+        title_text = #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="titleLevel != null">
+        title_level = #{titleLevel,jdbcType=INTEGER},
+      </if>
+      <if test="titleMajor != null">
+        title_major = #{titleMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="titleBackgroud != null">
+        title_backgroud = #{titleBackgroud,jdbcType=INTEGER},
+      </if>
+      <if test="titleOptionA != null">
+        title_option_a = #{titleOptionA,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionB != null">
+        title_option_b = #{titleOptionB,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionC != null">
+        title_option_c = #{titleOptionC,jdbcType=VARCHAR},
+      </if>
+      <if test="titleOptionD != null">
+        title_option_d = #{titleOptionD,jdbcType=VARCHAR},
+      </if>
+      <if test="titleExplain != null">
+        title_explain = #{titleExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="titleType != null">
+        title_type = #{titleType,jdbcType=INTEGER},
+      </if>
+      <if test="titleStatus != null">
+        title_status = #{titleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="titleAnswer != null">
+        title_answer = #{titleAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="titleTime != null">
+        title_time = #{titleTime,jdbcType=VARCHAR},
+      </if>
+      <if test="titleNum != null">
+        title_num = #{titleNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.exam.pojo.TitleTable">
+    update title_table
+    set title_text = #{titleText,jdbcType=VARCHAR},
+      title_level = #{titleLevel,jdbcType=INTEGER},
+      title_major = #{titleMajor,jdbcType=VARCHAR},
+      title_backgroud = #{titleBackgroud,jdbcType=INTEGER},
+      title_option_a = #{titleOptionA,jdbcType=VARCHAR},
+      title_option_b = #{titleOptionB,jdbcType=VARCHAR},
+      title_option_c = #{titleOptionC,jdbcType=VARCHAR},
+      title_option_d = #{titleOptionD,jdbcType=VARCHAR},
+      title_explain = #{titleExplain,jdbcType=VARCHAR},
+      title_type = #{titleType,jdbcType=INTEGER},
+      title_status = #{titleStatus,jdbcType=INTEGER},
+      title_answer = #{titleAnswer,jdbcType=VARCHAR},
+      title_time = #{titleTime,jdbcType=VARCHAR},
+      title_num = #{titleNum,jdbcType=INTEGER}
+    where title_id = #{titleId,jdbcType=INTEGER}
+  </update>
+</mapper>
